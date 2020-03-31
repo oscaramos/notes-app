@@ -1,5 +1,14 @@
 .note {
-  margin: auto;
-  width: 25%;
-  padding: 10px;
+  margin: 25px auto 25px;
+  width: 100%;
+
+  .card {
+    background-color: #ffffcc;
+    width: 100%;
+  }
+
+  .card-header {
+    display: block;
+    border-bottom: black solid 1px;
+  }
 }
