@@ -8,7 +8,8 @@
   }
 
   .card-header {
-    display: block;
+    display: flex;
+    justify-content: space-between;
     border-bottom: black solid 1px;
   }
 }

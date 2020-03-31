@@ -3,6 +3,10 @@
     width: 30%;
 }
 
+.clickable {
+    cursor: pointer;
+}
+
 * {
     box-sizing: border-box;
 }
