@@ -1,9 +1,11 @@
 import React from 'react';
+import marked from 'marked';
+import ReactHtmlParser from 'react-html-parser';
 
 const ViewNote = ({ note }) => {
   return (
     <div>
-      {note.text}
+      {ReactHtmlParser(marked(note.text))}
     </div>
   );
 };
