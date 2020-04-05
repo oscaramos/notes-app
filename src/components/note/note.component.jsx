@@ -13,8 +13,13 @@ const Note = ({ note, editNote, removeNote, toggleEditable }) => (
         <Card.Content>
           <Card.Header>
             <div className='card-header'>
-              <Icon name='remove' className='clickable' onClick={() => removeNote(note)} />
-              <Icon name='edit' className='clickable' onClick={() => toggleEditable(note)} />
+              <div className='header-left'>
+                <span>Created at: {note.dateCreated}</span>
+              </div>
+              <div className='card-right'>
+                <Icon name='remove' className='clickable' onClick={() => removeNote(note)} />
+                <Icon name='edit' className='clickable' onClick={() => toggleEditable(note)} />
+              </div>
             </div>
           </Card.Header>
           <Card.Description>

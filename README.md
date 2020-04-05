@@ -12,7 +12,7 @@ Picked up an idea from [here](https://github.com/florinpop17/app-ideas).
 ## Bonus features
 
 -   [x] User can create and edit a note in Markdown format. On save it will convert Markdown to HTML
--   [ ] User can see the date when he created the note
+-   [x] User can see the date when he created the note
 
 ## Useful links and resources
 

@@ -1,10 +1,9 @@
-import InitialNotes from './InitialNotes.json';
 import noteActionTypes from './note.types';
 
 import { addNewNote, removeNote, editNote, toggleNote } from "./note.utils";
 
 const INITIAL_STATE = {
-  notes: InitialNotes
+  notes: []
 };
 
 const noteReducer = (state=INITIAL_STATE, action={}) => {
