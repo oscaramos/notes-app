@@ -2,7 +2,7 @@ export const addNewNote = (notes) => {
   const lastid = notes.length ? notes[notes.length - 1].id : 1;
   const newNote = {
     id: lastid + 1,
-    text: 'Text',
+    text: '',
     dateCreated: new Date().toLocaleString(),
   }
   return [...notes, newNote]
