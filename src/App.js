@@ -1,12 +1,18 @@
-import React from 'react';
-import Button from '@material-ui/core/Button'
+import React, { useState } from 'react'
+import Container from '@material-ui/core/Container'
+
+import NoteCard from './components/NoteCard/NoteCard'
 
 function App() {
+  const [title, setTitle] = useState('My title')
+  const [creationDate, setCreationDate] = useState('17th JAN')
+  const [content, setContent] = useState('ajaja')
+
   return (
-    <div>
-      <Button color="primary">Hello World</Button>
-    </div>
-  );
+    <Container maxWidth='xs'>
+      <NoteCard title={title} creationDate={creationDate} content={content} />
+    </Container>
+  )
 }
 
-export default App;
+export default App
