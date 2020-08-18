@@ -71,6 +71,7 @@ function App() {
     ls.set('Notes', notes)
   }, [notes])
 
+
   return (
     <Container maxWidth='xs'>
       <Grid container direction='column' justify='space-between'
