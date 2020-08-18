@@ -21,7 +21,11 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-
+const noteColors = [
+  '#FFB507',
+  '#1FD0BF',
+  '#EB648B'
+]
 
 function App() {
   const classes = useStyles()
@@ -31,13 +35,19 @@ function App() {
       title: 'My title',
       creationDate: '17 jan',
       content: 'my content',
-      backgroundColor: '#FFB507'
+      backgroundColor: noteColors[0]
     },
     {
       title: 'My title 2',
       creationDate: '20 jan',
       content: 'My second content',
-      backgroundColor: '#1FD0BF'
+      backgroundColor: noteColors[1]
+    },
+    {
+      title: 'My title 3',
+      creationDate: '20 jan',
+      content: 'My second content',
+      backgroundColor: noteColors[2]
     },
   ])
   const addNote = () => {
@@ -45,7 +55,7 @@ function App() {
       title: 'new title',
       creationDate: '20 jan',
       content: 'My second content',
-      backgroundColor: '#1FD0BF'
+      backgroundColor: noteColors[notes.length%3]
     }])
   }
 
