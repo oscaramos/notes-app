@@ -6,11 +6,7 @@ import { makeStyles } from '@material-ui/core/styles'
 
 import * as PropTypes from 'prop-types'
 
-
 const useStyles = makeStyles(theme => ({
-  card: {
-    backgroundColor: '#FFB507',
-  },
   cardHeader: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -33,27 +29,32 @@ NoteCard.propTypes = {
   title: PropTypes.string,
   creationDate: PropTypes.string,
   content: PropTypes.string,
+  backgroundColor: PropTypes.string
 }
 
-export default function NoteCard(props) {
+NoteCard.defaultProps = {
+  backgroundColor: '#FFB507'
+}
+
+export default function NoteCard({ content, creationDate, title, backgroundColor }) {
   const classes = useStyles()
 
   return (
-    <Card className={classes.card} variant='outlined'>
+    <Card variant='outlined' style={{ backgroundColor }}>
       <CardContent>
         {/*----- Header ------*/}
         <div className={classes.cardHeader}>
           <Typography className={classes.title} variant='h5' component='h1'>
-            {props.title}
+            {title}
           </Typography>
           <Typography className={classes.date} variant='h6' component='h2'>
-            {props.creationDate}
+            {creationDate}
           </Typography>
         </div>
 
         {/*----- Body ------*/}
         <Typography className={classes.body} variant='body1'>
-          {props.content}
+          {content}
         </Typography>
       </CardContent>
     </Card>

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Container from '@material-ui/core/Container'
 
 import NoteCard from './components/NoteCard/NoteCard'
+import Grid from '@material-ui/core/Grid'
 
 function App() {
   const [title, setTitle] = useState('My title')
@@ -10,7 +11,22 @@ function App() {
 
   return (
     <Container maxWidth='xs'>
-      <NoteCard title={title} creationDate={creationDate} content={content} />
+      <Grid container spacing={1} direction='column'>
+        <Grid item>
+          <NoteCard title={title}
+                    creationDate={creationDate}
+                    content={content}
+                    backgroundColor="#FFB507"
+          />
+        </Grid>
+        <Grid item>
+          <NoteCard title={title}
+                    creationDate={creationDate}
+                    content={content}
+                    backgroundColor='blue'
+          />
+        </Grid>
+      </Grid>
     </Container>
   )
 }
