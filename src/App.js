@@ -61,7 +61,7 @@ function App() {
 
   useEffect(() => {
     const savedNotes = ls.get('Notes')
-    if (savedNotes.length > 0) {
+    if (savedNotes && savedNotes.length > 0) {
       console.log(savedNotes)
       setNotes(savedNotes)
     }
