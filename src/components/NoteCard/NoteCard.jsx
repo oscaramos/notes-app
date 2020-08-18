@@ -1,8 +1,5 @@
-import React, { useRef, useState } from 'react'
-import ContentEditable from 'react-contenteditable'
+import React, { useEffect, useState } from 'react'
 import * as PropTypes from 'prop-types'
-import { markdown } from 'markdown'
-import htmlToText from 'html-to-text'
 
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
@@ -12,7 +9,8 @@ import { makeStyles } from '@material-ui/core/styles'
 
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline'
 import IconButton from '@material-ui/core/IconButton'
-
+import TextField from '@material-ui/core/TextField'
+import ReactMarkdown from 'react-markdown'
 
 
 const useStyles = makeStyles(() => ({
@@ -54,30 +52,19 @@ NoteCard.defaultProps = {
   backgroundColor: '#FFB507',
 }
 
-export default function NoteCard({ content, creationDate, title, backgroundColor, onChangeTitle, onChangeContent, onDelete }) {
+export default function NoteCard({ title, content, creationDate, backgroundColor, onChangeTitle, onChangeContent, onDelete }) {
   const classes = useStyles()
-  const titleRef = useRef(title)
-  const contentRef = useRef(content)
-  const contentView = useRef(markdown.toHTML(content));
-  const [, setIsEditing] = useState(false);
 
-  const handleChangeContent = evt => {
-    contentRef.current = evt.target.value
-  }
+  const [titleText, setTitleText] = useState(title);
+  const [contentText, setContentText] = useState(content);
 
+  const [isEditingTitle, setIsEditingTitle] = useState(false);
+  const [isEditingContent, setIsEditingContent] = useState(false);
 
-  const handleBlurContent = () => {
-    const contentWithoutHTML = htmlToText.fromString(contentRef.current)
-
-    onChangeContent(contentWithoutHTML)
-    contentView.current = markdown.toHTML(contentWithoutHTML)
-    setIsEditing(false)
-  }
-
-  const handleClickContent = () => {
-    contentView.current = contentRef.current
-    setIsEditing(true)
-  }
+  useEffect(() => {
+    setTitleText(title)
+    setContentText(content)
+  }, [title, content])
 
   return (
     <Card variant='outlined' className={classes.card} style={{ backgroundColor }}>
@@ -85,7 +72,21 @@ export default function NoteCard({ content, creationDate, title, backgroundColor
         {/*----- Header ------*/}
         <div className={classes.cardHeader}>
           <Typography className={classes.title} variant='h5' component='h1'>
-            <ContentEditable html={titleRef.current} onBlur={() => {onChangeTitle(titleRef.current)}} onChange={evt => {titleRef.current = evt.target.value}} />
+            {
+              isEditingTitle?
+                <TextField variant='outlined'
+                           value={titleText}
+                           onChange={e => setTitleText(e.target.value)}
+                           onBlur={() => {
+                             onChangeTitle(titleText)
+                             setIsEditingTitle(false)
+                           }}
+                />
+              :
+                <div onClick={() => setIsEditingTitle(true)} >
+                  {titleText}
+                </div>
+            }
           </Typography>
 
           <Typography className={classes.date} variant='h6' component='h2'>
@@ -95,8 +96,26 @@ export default function NoteCard({ content, creationDate, title, backgroundColor
 
         {/*----- Body ------*/}
         <Typography className={classes.body} variant='body1' component='div'>
-          <ContentEditable html={contentView.current} onBlur={handleBlurContent}
-                           onChange={handleChangeContent} onClick={handleClickContent} />
+          <div>
+            {
+              isEditingContent?
+                <TextField value={contentText}
+                           multiline
+                           rows={8}
+                           variant='outlined'
+                           fullWidth
+                           onChange={e => setContentText(e.target.value)}
+                           onBlur={() => {
+                             onChangeContent(contentText)
+                             setIsEditingContent(false)
+                           }}
+                />
+                :
+                <div onClick={() => setIsEditingContent(true)}>
+                  <ReactMarkdown source={content}/>
+                </div>
+            }
+          </div>
         </Typography>
 
         {/*----- Toolbar -----*/}

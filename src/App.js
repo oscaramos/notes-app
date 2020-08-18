@@ -14,8 +14,6 @@ import InitialNotes from './InitialNotes'
 import NotesColors from './NotesColors'
 
 
-
-
 const useStyles = makeStyles(theme => ({
   root: {
     position: 'relative',
@@ -32,6 +30,7 @@ function App() {
   const classes = useStyles()
 
   const [notes, setNotes] = useState(InitialNotes)
+
   const addNote = () => {
     setNotes([...notes, {
       title: 'new title',
@@ -59,16 +58,17 @@ function App() {
     setNotes(newNotes)
   }
 
-  // useEffect(() => {
-  //   const savedNotes = ls.get('Notes')
-  //   if (savedNotes.length > 0) {
-  //     setNotes(savedNotes)
-  //   }
-  // }, [])
-  //
-  // useEffect(() => {
-  //   ls.set('Notes', notes)
-  // }, [notes])
+  useEffect(() => {
+    const savedNotes = ls.get('Notes')
+    if (savedNotes.length > 0) {
+      console.log(savedNotes)
+      setNotes(savedNotes)
+    }
+  }, [])
+
+  useEffect(() => {
+    ls.set('Notes', notes)
+  }, [notes])
 
   return (
     <Container maxWidth='xs' className={classes.root}>
