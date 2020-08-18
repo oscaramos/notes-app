@@ -41,7 +41,24 @@ function App() {
     },
   ])
   const addNote = () => {
-    setNotes([...notes, {}])
+    setNotes([...notes, {
+      title: 'new title',
+      creationDate: '20 jan',
+      content: 'My second content',
+      backgroundColor: '#1FD0BF'
+    }])
+  }
+
+  const onChangeTitle = (index, newTitle) => {
+    const newNotes = [...notes]
+    newNotes[index].title = newTitle
+    setNotes(newNotes)
+  }
+
+  const onChangeContent = (index, newContent) => {
+    const newNotes = [...notes]
+    newNotes[index].content = newContent
+    setNotes(newNotes)
   }
 
   return (
@@ -50,12 +67,14 @@ function App() {
         <Grid item>
           <Grid container spacing={1} direction='column'>
             {
-              notes.map(card => (
-                <Grid item key={card.title}>
+              notes.map((card, index) => (
+                <Grid item key={index}>
                   <NoteCard title={card.title}
                             creationDate={card.creationDate}
                             content={card.content}
                             backgroundColor={card.backgroundColor}
+                            onChangeTitle={newTitle => onChangeTitle(index, newTitle)}
+                            onChangeContent={newContent => onChangeContent(index, newContent)}
                   />
                 </Grid>
               ))
