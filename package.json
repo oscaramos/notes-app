@@ -1,6 +1,16 @@
 {
   "name": "notes-app",
-  "version": "0.1.0",
+  "description": "An simple notes app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/oscaramos/notes-app.git"
+  },
+  "keywords": [
+    "notes"
+  ],
+  "author": "oscaramos",
+  "homepage": "https://notes-app-rose.vercel.app/",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.0",
