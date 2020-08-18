@@ -3,12 +3,15 @@ import Container from '@material-ui/core/Container'
 import dayjs from 'dayjs'
 import ls from 'local-storage'
 
-import NoteCard from './components/NoteCard/NoteCard'
 import Grid from '@material-ui/core/Grid'
 import Fab from '@material-ui/core/Fab'
-
 import AddIcon from '@material-ui/icons/Add';
 import { makeStyles } from '@material-ui/core/styles'
+
+import NoteCard from './components/NoteCard/NoteCard'
+
+import InitialNotes from './InitialNotes'
+import NotesColors from './NotesColors'
 
 
 
@@ -25,41 +28,16 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const noteColors = [
-  '#FFB507',
-  '#1FD0BF',
-  '#EB648B'
-]
-
 function App() {
   const classes = useStyles()
 
-  const [notes, setNotes] = useState([
-    {
-      title: 'My title',
-      creationDate: dayjs("1 Aug", "DD MM").format("DD MMM"),
-      content: 'my content',
-      backgroundColor: noteColors[0]
-    },
-    {
-      title: 'My title 2',
-      creationDate: dayjs("2 Aug", "DD MM").format("DD MMM"),
-      content: 'My second content',
-      backgroundColor: noteColors[1]
-    },
-    {
-      title: 'My title 3',
-      creationDate: dayjs("3 Aug", "DD MM").format("DD MMM"),
-      content: 'My second content',
-      backgroundColor: noteColors[2]
-    },
-  ])
+  const [notes, setNotes] = useState(InitialNotes)
   const addNote = () => {
     setNotes([...notes, {
       title: 'new title',
       creationDate: dayjs().format("DD MMM"),
       content: 'My second content',
-      backgroundColor: noteColors[notes.length%3]
+      backgroundColor: NotesColors[notes.length%3]
     }])
   }
 
@@ -81,16 +59,16 @@ function App() {
     setNotes(newNotes)
   }
 
-  useEffect(() => {
-    const savedNotes = ls.get('Notes')
-    if (savedNotes.length > 0) {
-      setNotes(savedNotes)
-    }
-  }, [])
-
-  useEffect(() => {
-    ls.set('Notes', notes)
-  }, [notes])
+  // useEffect(() => {
+  //   const savedNotes = ls.get('Notes')
+  //   if (savedNotes.length > 0) {
+  //     setNotes(savedNotes)
+  //   }
+  // }, [])
+  //
+  // useEffect(() => {
+  //   ls.set('Notes', notes)
+  // }, [notes])
 
   return (
     <Container maxWidth='xs' className={classes.root}>
