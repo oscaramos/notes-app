@@ -7,6 +7,9 @@ import { makeStyles } from '@material-ui/core/styles'
 import * as PropTypes from 'prop-types'
 
 const useStyles = makeStyles(theme => ({
+  card: {
+    borderRadius: 18
+  },
   cardHeader: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -40,7 +43,7 @@ export default function NoteCard({ content, creationDate, title, backgroundColor
   const classes = useStyles()
 
   return (
-    <Card variant='outlined' style={{ backgroundColor }}>
+    <Card variant='outlined' className={classes.card} style={{ backgroundColor }}>
       <CardContent>
         {/*----- Header ------*/}
         <div className={classes.cardHeader}>
