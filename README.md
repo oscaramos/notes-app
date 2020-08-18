@@ -2,6 +2,11 @@
 
 Picked up an idea from [here](https://github.com/florinpop17/app-ideas).
 
+# Comparison
+
+* [Old version](https://oscaramos.github.io/notes-app/) 
+* [New version](https://notes-app-rose.vercel.app)
+
 ## User Stories
 
 -   [x] User can create a note
