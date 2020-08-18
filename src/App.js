@@ -17,12 +17,13 @@ import NotesColors from './NotesColors'
 const useStyles = makeStyles(theme => ({
   root: {
     position: 'relative',
-    height: '98vh'
+    height: '100%'
   },
-  fab: {
+  fabContainer: {
     position: 'absolute',
-    bottom: theme.spacing(2),
-    right: theme.spacing(4),
+    bottom: theme.spacing(-4),
+    right: theme.spacing(0),
+    width: '100%'
   }
 }))
 
@@ -71,8 +72,9 @@ function App() {
   }, [notes])
 
   return (
-    <Container maxWidth='xs' className={classes.root}>
-      <Grid container direction='column' justify='space-between' style={{ height: '100%' }}>
+    <Container maxWidth='xs'>
+      <Grid container direction='column' justify='space-between'
+            className={classes.root}>
         <Grid item>
           <Grid container spacing={1} direction='column'>
             {
@@ -92,10 +94,14 @@ function App() {
           </Grid>
         </Grid>
 
-        <Grid item>
-          <Fab color="primary" aria-label="add" className={classes.fab} onClick={addNote}>
-            <AddIcon />
-          </Fab>
+        <Grid item className={classes.fabContainer}>
+          <Grid container justify='center'>
+            <Grid item>
+              <Fab color="primary" aria-label="add" onClick={addNote}>
+                <AddIcon />
+              </Fab>
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
     </Container>
