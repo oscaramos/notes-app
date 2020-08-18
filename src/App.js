@@ -73,7 +73,7 @@ function App() {
 
 
   return (
-    <Container maxWidth='xs'>
+    <Container maxWidth='sm'>
       <Grid container direction='column' justify='space-between'
             className={classes.root}>
         <Grid item>
