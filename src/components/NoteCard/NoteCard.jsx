@@ -5,10 +5,14 @@ import * as PropTypes from 'prop-types'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
+import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core/styles'
 
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import IconButton from '@material-ui/core/IconButton'
 
-const useStyles = makeStyles(theme => ({
+
+const useStyles = makeStyles(() => ({
   card: {
     borderRadius: 18,
   },
@@ -28,6 +32,12 @@ const useStyles = makeStyles(theme => ({
   body: {
     color: 'white',
   },
+  deleteButton: {
+    padding: 0,
+    '&:hover': {
+      backgroundColor: 'transparent'
+    }
+  }
 }))
 
 NoteCard.propTypes = {
@@ -41,7 +51,7 @@ NoteCard.defaultProps = {
   backgroundColor: '#FFB507',
 }
 
-export default function NoteCard({ content, creationDate, title, backgroundColor, onChangeTitle, onChangeContent }) {
+export default function NoteCard({ content, creationDate, title, backgroundColor, onChangeTitle, onChangeContent, onDelete }) {
   const classes = useStyles()
   const titleRef = useRef(title)
   const contentRef = useRef(content)
@@ -73,13 +83,19 @@ export default function NoteCard({ content, creationDate, title, backgroundColor
           <Typography className={classes.date} variant='h6' component='h2'>
             {creationDate}
           </Typography>
-
         </div>
 
         {/*----- Body ------*/}
         <Typography className={classes.body} variant='body1' component="div">
           <ContentEditable html={contentRef.current} onBlur={handleBlurContent} onChange={handleChangeContent} />
         </Typography>
+        <Grid container justify='flex-end'>
+          <Grid item>
+            <IconButton aria-label='delete' className={classes.deleteButton} onClick={onDelete}>
+              <DeleteOutlineIcon color="secondary" fontSize="small"/>
+            </IconButton>
+          </Grid>
+        </Grid>
       </CardContent>
     </Card>
   )

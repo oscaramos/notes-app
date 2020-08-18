@@ -61,6 +61,12 @@ function App() {
     setNotes(newNotes)
   }
 
+  const onDeleteNote = (index) => {
+    const newNotes = [...notes]
+    newNotes.splice(index, 1)
+    setNotes(newNotes)
+  }
+
   return (
     <Container maxWidth='xs' className={classes.root}>
       <Grid container direction='column' justify='space-between' style={{ height: '100%' }}>
@@ -75,6 +81,7 @@ function App() {
                             backgroundColor={card.backgroundColor}
                             onChangeTitle={newTitle => onChangeTitle(index, newTitle)}
                             onChangeContent={newContent => onChangeContent(index, newContent)}
+                            onDelete={() => onDeleteNote(index)}
                   />
                 </Grid>
               ))
