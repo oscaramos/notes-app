@@ -8,6 +8,8 @@ import Fab from '@material-ui/core/Fab'
 import AddIcon from '@material-ui/icons/Add';
 import { makeStyles } from '@material-ui/core/styles'
 
+import dayjs from 'dayjs'
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -33,19 +35,19 @@ function App() {
   const [notes, setNotes] = useState([
     {
       title: 'My title',
-      creationDate: '17 jan',
+      creationDate: dayjs("1 Aug", "DD MM").format("DD MMM"),
       content: 'my content',
       backgroundColor: noteColors[0]
     },
     {
       title: 'My title 2',
-      creationDate: '20 jan',
+      creationDate: dayjs("2 Aug", "DD MM").format("DD MMM"),
       content: 'My second content',
       backgroundColor: noteColors[1]
     },
     {
       title: 'My title 3',
-      creationDate: '20 jan',
+      creationDate: dayjs("3 Aug", "DD MM").format("DD MMM"),
       content: 'My second content',
       backgroundColor: noteColors[2]
     },
@@ -53,7 +55,7 @@ function App() {
   const addNote = () => {
     setNotes([...notes, {
       title: 'new title',
-      creationDate: '20 jan',
+      creationDate: dayjs().format("DD MMM"),
       content: 'My second content',
       backgroundColor: noteColors[notes.length%3]
     }])
