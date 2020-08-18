@@ -3,9 +3,30 @@ import Container from '@material-ui/core/Container'
 
 import NoteCard from './components/NoteCard/NoteCard'
 import Grid from '@material-ui/core/Grid'
+import Fab from '@material-ui/core/Fab'
+
+import AddIcon from '@material-ui/icons/Add';
+import { makeStyles } from '@material-ui/core/styles'
+
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    position: 'relative',
+    height: '98vh'
+  },
+  fab: {
+    position: 'absolute',
+    bottom: theme.spacing(2),
+    right: theme.spacing(4),
+  }
+}))
+
+
 
 function App() {
-  const [cards, setCards] = useState([
+  const classes = useStyles()
+
+  const [notes, setNotes] = useState([
     {
       title: 'My title',
       creationDate: '17 jan',
@@ -19,21 +40,34 @@ function App() {
       backgroundColor: '#1FD0BF'
     },
   ])
+  const addNote = () => {
+    setNotes([...notes, {}])
+  }
 
   return (
-    <Container maxWidth='xs'>
-      <Grid container spacing={1} direction='column'>
-        {
-          cards.map(card => (
-            <Grid item>
-              <NoteCard title={card.title}
-                        creationDate={card.creationDate}
-                        content={card.content}
-                        backgroundColor={card.backgroundColor}
-              />
-            </Grid>
-          ))
-        }
+    <Container maxWidth='xs' className={classes.root}>
+      <Grid container direction='column' justify='space-between' style={{ height: '100%' }}>
+        <Grid item>
+          <Grid container spacing={1} direction='column'>
+            {
+              notes.map(card => (
+                <Grid item key={card.title}>
+                  <NoteCard title={card.title}
+                            creationDate={card.creationDate}
+                            content={card.content}
+                            backgroundColor={card.backgroundColor}
+                  />
+                </Grid>
+              ))
+            }
+          </Grid>
+        </Grid>
+
+        <Grid item>
+          <Fab color="primary" aria-label="add" className={classes.fab} onClick={addNote}>
+            <AddIcon />
+          </Fab>
+        </Grid>
       </Grid>
     </Container>
   )
