@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Container from '@material-ui/core/Container'
+import dayjs from 'dayjs'
+import ls from 'local-storage'
 
 import NoteCard from './components/NoteCard/NoteCard'
 import Grid from '@material-ui/core/Grid'
@@ -8,7 +10,7 @@ import Fab from '@material-ui/core/Fab'
 import AddIcon from '@material-ui/icons/Add';
 import { makeStyles } from '@material-ui/core/styles'
 
-import dayjs from 'dayjs'
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -78,6 +80,17 @@ function App() {
     newNotes.splice(index, 1)
     setNotes(newNotes)
   }
+
+  useEffect(() => {
+    const savedNotes = ls.get('Notes')
+    if (savedNotes.length > 0) {
+      setNotes(savedNotes)
+    }
+  }, [])
+
+  useEffect(() => {
+    ls.set('Notes', notes)
+  }, [notes])
 
   return (
     <Container maxWidth='xs' className={classes.root}>
